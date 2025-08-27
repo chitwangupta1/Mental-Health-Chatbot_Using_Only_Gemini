@@ -6,7 +6,7 @@ import json
 import google.generativeai as genai
 
 # Configure Gemini API
-genai.configure(api_key="AIzaSyAER3pJ3aGiHoPlh4v9SuLDmCcIKqKC_UE")
+genai.configure(api_key="GOOGLE_API_KEY")
 gemini_model = ChatGoogleGenerativeAI(model='models/gemini-2.0-flash')
 
 
@@ -187,3 +187,4 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
