@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resources & Acknowledgements</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 bg-opacity-70 backdrop-blur-md p-6">
+      <!-- Left Hover Sidebar Wrapper -->
+<div class="fixed top-4 bottom-4 left-0 flex z-50 group">
+  <!-- Hover Edge -->
+  <div class="w-2 bg-transparent group-hover:w-64 transition-all duration-300 overflow-hidden">
+    <!-- Sidebar Content -->
+    <div class="h-full w-64 bg-blue-800/30 backdrop-blur-md text-white p-4 shadow-2xl rounded-r-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white">Navigation</h2>
+      <nav class="flex flex-col space-y-4">
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'homepage' %}" class="text-white text-xl hover:underline">Home</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'chatbot_ui' %}" class="text-white text-xl hover:underline">Chatbot</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'moodtracker' %}" class="text-white text-xl hover:underline">Mood Tracker</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'motivation' %}" class="text-white text-xl hover:underline">Motivation</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Checklist' %}" class="text-white text-xl hover:underline">Checklist</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Journal' %}" class="text-white text-xl hover:underline">Journal</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Resources' %}" class="text-white text-xl hover:underline">Resources</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow mb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 text-xl font-bold text-blue-600">
+        Mental Wellness
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <a href="{% url 'homepage' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="{% url 'chatbot_ui' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Chatbot</a>
+        <a href="{% url 'moodtracker' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mood Tracker</a>
+        <a href="{% url 'Journal' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Journal</a>
+        <a href="{% url 'motivation' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Motivation</a>
+        <a href="{% url 'Checklist' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Checklist</a>
+        <a href="{% url 'Resources' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <div class="container mx-auto bg-white bg-opacity-40 backdrop-blur-md rounded p-6">
+      <h1 class="text-center text-4xl font-bold mb-8">
+        Resources &amp; Acknowledgements
+      </h1>
+      <section id="resources" class="mb-12 bg-white bg-opacity-40 backdrop-blur-md rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold mb-4">Hospitals Near My College</h2>
+        <ul class="list-disc list-inside space-y-2">
+        <!-- Hospitals Near College Section -->
+        <ul class="list-disc list-inside space-y-4">
+          <li>
+            <strong>Fortis Hospital Ludhiana:</strong> 
+            <a href="https://www.fortishealthcare.com/location/fortis-hospital-ludhiana" target="_blank" class="text-blue-500 hover:underline">Visit Website</a> | 
+            <a href="https://www.waze.com/live-map/directions/in/pb/ludhiana/fortis-hospital-ludhiana?to=place.ChIJl8Rsu3mBGjkRepKT5t-IQis" target="_blank" class="text-blue-500 hover:underline">View on Map</a>
+          </li>
+          <li>
+            <strong>SOHANA OSPITAL:</strong> 
+            <a href="https://www.sghshospitals.com/" target="_blank" class="text-blue-500 hover:underline">Visit Website</a> | 
+            <a href="https://www.google.com/maps/dir//Sohana+Hospital,+Super+Specialty+Hospital,+SH12A,+Sector+77,+Sahibzada+Ajit+Singh+Nagar,+Punjab+140308/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x390feee61e99e667:0x3fabe7f5484f0762?sa=X&ved=1t:57443&ictx=111" target="_blank" class="text-blue-500 hover:underline">View on Map</a>
+          </li>
+          <li>
+            <strong>Seth Hospital:</strong> 
+            <a href="https://www.waze.com/live-map/directions/seth-hospital-rose-enclave-21-ludhiana?to=place.w.49676597.496962579.15234123" target="_blank" class="text-blue-500 hover:underline">View on Map</a>
+          </li>
+          <li>
+            <strong>SPS Hospital:</strong> 
+            <a href="https://spshospitals.com/" target="_blank" class="text-blue-500 hover:underline">Visit Website</a>
+          </li>
+          <li>
+            <strong>Pancham Multispecialty Hospital:</strong> 
+            <a href="https://panchamhospital.com/" target="_blank" class="text-blue-500 hover:underline">Visit Website</a>
+          </li>
+          <li>
+            <strong>Mohandai Oswal Hospital (Cancer Hospital):</strong> 
+            <a href="https://moh.org.in/" target="_blank" class="text-blue-500 hover:underline">Visit Website</a>
+          </li>
+        </ul>
+      </section>
+ 
+      <section id="help" class="mb-12 bg-white bg-opacity-40 backdrop-blur-md rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold mb-4">Help for Depression</h2>
+        <ul class="list-disc list-inside space-y-2 text-blue-700">
+          <li><a href="https://www.vandrevalafoundation.com/" target="_blank" class="hover:underline">Vandrevala Foundation Helpline</a></li>
+          <li><a href="https://www.mannmarg.org/" target="_blank" class="hover:underline">Mann Marg – Mental Health Awareness and Support</a></li>
+          <li><a href="https://www.icallhelpline.org/" target="_blank" class="hover:underline">iCall – Tata Institute of Social Sciences</a></li>
+          <li><a href="https://telemanas.mohfw.gov.in/home" target="_blank" class="hover:underline">Tele MANAS</a></li>
+          <li><a href="https://connectingtrust.org/" target="_blank" class="hover:underline">Connecting Trust – Emotional Support Helpline</a></li>
+        </ul>
+      </section>
+      <section id="mission" class="mb-12 bg-white bg-opacity-40 backdrop-blur-md rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold mb-4">Our Mission</h2>
+        <p>
+          Our mission is to provide high-quality resources and data for
+          developers and researchers.
+        </p>
+      </section>
+      <section id="contact" class="bg-white bg-opacity-40 backdrop-blur-md rounded-lg shadow p-6">
+        <h2 class="text-2xl font-semibold mb-4">Contact Us</h2>
+        <ul class="list-none space-y-2">
+          <li><strong>Chitwan Gupta:</strong> +91 9465886688</li>
+        </ul>
+      </section>
+    </div>
+  </body>
+</html>
+{% comment %} <!-- Image Gallery Section -->
+<div class="container mx-auto mt-8 mb-12 bg-white bg-opacity-40 backdrop-blur-md rounded p-6">
+    <h2 class="text-2xl font-semibold mb-4 text-center">Under the guidance of</h2>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="flex flex-col items-center">
+            <img src="PICTURES/dheeruu.png" alt="Gallery Image 1" class="rounded shadow w-full h-48 object-cover mb-2" />
+            <span class="text-sm text-gray-700">Dr. Dheerendra Singh</span>
+        </div>
+        <div class="flex flex-col items-center">
+            <img src="PICTURES/ashh.png" alt="Gallery Image 2" class="rounded shadow w-full h-48 object-cover mb-2" />
+            <span class="text-sm text-gray-700">Dr. Ashwani Kumar</span>
+        </div>
+        <div class="flex flex-col items-center">
+            <img src="PICTURES/araara.png" alt="Gallery Image 3" class="rounded shadow w-full h-48 object-cover mb-2" />
+            <span class="text-sm text-gray-700">Dr Aradhana Mehta</span>
+        </div>
+        <div class="flex flex-col items-center">
+            <img src="PICTURES/dinesh.png" alt="Gallery Image 4" class="rounded shadow w-full h-48 object-cover mb-2" />
+            <span class="text-sm text-gray-700">Dr Dinesh Sharma</span>
+        </div>
+    </div>
+</div> {% endcomment %}
+</div>

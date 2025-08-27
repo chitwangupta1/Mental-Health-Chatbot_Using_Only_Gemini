@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Mental Wellness - Checklist</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 font-sans">
+      <!-- Left Hover Sidebar Wrapper -->
+<div class="fixed top-4 bottom-4 left-0 flex z-50 group">
+  <!-- Hover Edge -->
+  <div class="w-2 bg-transparent group-hover:w-64 transition-all duration-300 overflow-hidden">
+    <!-- Sidebar Content -->
+    <div class="h-full w-64 bg-blue-800/30 backdrop-blur-md text-white p-4 shadow-2xl rounded-r-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white">Navigation</h2>
+      <nav class="flex flex-col space-y-4">
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'homepage' %}" class="text-white text-xl hover:underline">Home</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'chatbot_ui' %}" class="text-white text-xl hover:underline">Chatbot</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'moodtracker' %}" class="text-white text-xl hover:underline">Mood Tracker</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'motivation' %}" class="text-white text-xl hover:underline">Motivation</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Checklist' %}" class="text-white text-xl hover:underline">Checklist</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Journal' %}" class="text-white text-xl hover:underline">Journal</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Resources' %}" class="text-white text-xl hover:underline">Resources</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow mb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 text-xl font-bold text-blue-600">
+        Mental Wellness
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <a href="{% url 'homepage' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="{% url 'chatbot_ui' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Chatbot</a>
+        <a href="{% url 'moodtracker' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mood Tracker</a>
+        <a href="{% url 'Journal' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Journal</a>
+        <a href="{% url 'motivation' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Motivation</a>
+        <a href="{% url 'Checklist' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Checklist</a>
+        <a href="{% url 'Resources' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <!-- Main Content and Sidebar Wrapper -->
+    <div class="container mx-auto px-4 flex flex-col lg:flex-row gap-6">
+      <!-- Main Content -->
+      <main class="flex-1">
+        <h1 class="text-3xl font-bold mb-6 text-blue-700">
+          Self-Care Checklist
+        </h1>
+        <form
+          id="checklist-form"
+          class="bg-white shadow rounded p-6 max-w-lg mx-auto"
+        >
+          <div class="mb-4">
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="item"
+                value="Drink at least 8 glasses of water"
+                class="form-checkbox text-blue-600"
+              />
+              <span class="ml-2 text-gray-800"
+                >Drink at least 8 glasses of water</span
+              >
+            </label>
+          </div>
+          <div class="mb-4">
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="item"
+                value="Take a 10-minute walk"
+                class="form-checkbox text-blue-600"
+              />
+              <span class="ml-2 text-gray-800">Take a 10-minute walk</span>
+            </label>
+          </div>
+          <div class="mb-4">
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="item"
+                value="Practice deep breathing exercises"
+                class="form-checkbox text-blue-600"
+              />
+              <span class="ml-2 text-gray-800"
+                >Practice deep breathing exercises</span
+              >
+            </label>
+          </div>
+          <div class="mb-4">
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="item"
+                value="Write down 3 things you're grateful for"
+                class="form-checkbox text-blue-600"
+              />
+              <span class="ml-2 text-gray-800"
+                >Write down 3 things you're grateful for</span
+              >
+            </label>
+          </div>
+          <div class="mb-4">
+            <label class="inline-flex items-center">
+              <input
+                type="checkbox"
+                name="item"
+                value="Get at least 7 hours of sleep"
+                class="form-checkbox text-blue-600"
+              />
+              <span class="ml-2 text-gray-800"
+                >Get at least 7 hours of sleep</span
+              >
+            </label>
+          </div>
+          <button
+            type="submit"
+            class="mt-4 w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+          >
+            Save Checklist
+          </button>
+        </form>
+      </main>
+
+      <!-- Sidebar -->
+      <aside
+        class="w-full lg:w-80 bg-white shadow rounded p-6 max-h-[calc(100vh-100px)] overflow-y-auto"
+      >
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700">
+          History (Last 7 Days)
+        </h2>
+        <div id="history-list" class="space-y-4 text-gray-800">
+          <!-- Checklist history items will appear here -->
+        </div>
+      </aside>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const form = document.getElementById("checklist-form");
+      const historyList = document.getElementById("history-list");
+      const STORAGE_KEY = "checklistHistory";
+
+      function saveChecklist(items) {
+        const now = new Date().toISOString();
+        const entry = { date: now, items: items };
+        let history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        history.push(entry);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+      }
+
+      function getRecentHistory() {
+        let history = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+        return history.filter((entry) => new Date(entry.date) >= sevenDaysAgo);
+      }
+
+      function renderHistory() {
+        const recentHistory = getRecentHistory();
+        historyList.innerHTML = "";
+
+        if (recentHistory.length === 0) {
+          historyList.innerHTML =
+            '<p class="text-gray-500">No checklist history for the last 7 days.</p>';
+          return;
+        }
+
+        recentHistory.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        recentHistory.forEach((entry) => {
+          const date = new Date(entry.date);
+          const dateString = date.toLocaleDateString(undefined, {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          });
+
+          const container = document.createElement("div");
+          container.classList.add(
+            "border",
+            "border-gray-200",
+            "rounded",
+            "p-3",
+            "bg-gray-50"
+          );
+
+          const dateEl = document.createElement("h3");
+          dateEl.classList.add("font-semibold", "mb-2", "text-blue-600");
+          dateEl.textContent = dateString;
+
+          const ul = document.createElement("ul");
+          ul.classList.add("list-disc", "list-inside", "text-gray-700");
+
+          entry.items.forEach((item) => {
+            const li = document.createElement("li");
+            li.textContent = item;
+            ul.appendChild(li);
+          });
+
+          container.appendChild(dateEl);
+          container.appendChild(ul);
+          historyList.appendChild(container);
+        });
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // Ensure compatibility across browsers: always handle as NodeList
+        const inputs = form.querySelectorAll('input[name="item"]:checked');
+        const checkedItems = Array.from(inputs).map((input) => input.value);
+
+        if (checkedItems.length === 0) {
+          alert("Please select at least one item before saving.");
+          return;
+        }
+
+        saveChecklist(checkedItems);
+        renderHistory();
+        form.reset();
+      });
+
+      // Initial render on page load
+      renderHistory();
+    </script>
+  </body>
+</html>

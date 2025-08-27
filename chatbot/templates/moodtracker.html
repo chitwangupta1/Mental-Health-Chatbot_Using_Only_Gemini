@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Student Mental Wellness - Mood Tracker</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body class="bg-gray-50 font-sans">
+      <!-- Left Hover Sidebar Wrapper -->
+<div class="fixed top-4 bottom-4 left-0 flex z-50 group">
+  <!-- Hover Edge -->
+  <div class="w-2 bg-transparent group-hover:w-64 transition-all duration-300 overflow-hidden">
+    <!-- Sidebar Content -->
+    <div class="h-full w-64 bg-blue-800/30 backdrop-blur-md text-white p-4 shadow-2xl rounded-r-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white">Navigation</h2>
+      <nav class="flex flex-col space-y-4">
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'homepage' %}" class="text-white text-xl hover:underline">Home</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'chatbot_ui' %}" class="text-white text-xl hover:underline">Chatbot</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'moodtracker' %}" class="text-white text-xl hover:underline">Mood Tracker</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'motivation' %}" class="text-white text-xl hover:underline">Motivation</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Checklist' %}" class="text-white text-xl hover:underline">Checklist</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Journal' %}" class="text-white text-xl hover:underline">Journal</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Resources' %}" class="text-white text-xl hover:underline">Resources</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow mb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 text-xl font-bold text-blue-600">
+        Mental Wellness
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <a href="{% url 'homepage' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="{% url 'chatbot_ui' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Chatbot</a>
+        <a href="{% url 'moodtracker' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mood Tracker</a>
+        <a href="{% url 'Journal' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Journal</a>
+        <a href="{% url 'motivation' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Motivation</a>
+        <a href="{% url 'Checklist' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Checklist</a>
+        <a href="{% url 'Resources' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+    <div class="container mx-auto px-4">
+      <h1 class="text-3xl font-bold mb-6 text-blue-700 text-center">
+        Mood Tracker
+      </h1>
+
+      <div class="flex flex-col md:flex-row justify-center mb-8 gap-6">
+        <div class="w-full md:w-1/2 bg-white shadow rounded p-6">
+          <canvas
+            id="moodChart"
+            aria-label="Mood frequency chart"
+            role="img"
+          ></canvas>
+        </div>
+        <div
+          class="w-full md:w-1/2 bg-white shadow rounded p-6 flex flex-col justify-center"
+        >
+          <div
+            id="avgMood"
+            class="text-center text-xl font-semibold mt-6 md:mt-0"
+          ></div>
+          <div id="moodLogDetails" class="mt-4 text-gray-700 text-sm"></div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6 bg-white shadow rounded p-6">
+          <h2 class="text-xl font-semibold mb-4 text-blue-700 text-center">
+            Log Today's Mood
+          </h2>
+          <form id="mood-form" class="flex justify-center gap-6 flex-wrap">
+            <button
+              type="button"
+              class="mood-btn text-4xl"
+              data-mood="Happy"
+              aria-label="Happy mood"
+              title="Happy"
+            >
+              😊
+            </button>
+            <button
+              type="button"
+              class="mood-btn text-4xl"
+              data-mood="Sad"
+              aria-label="Sad mood"
+              title="Sad"
+            >
+              😢
+            </button>
+            <button
+              type="button"
+              class="mood-btn text-4xl"
+              data-mood="Neutral"
+              aria-label="Neutral mood"
+              title="Neutral"
+            >
+              😐
+            </button>
+            <button
+              type="button"
+              class="mood-btn text-4xl"
+              data-mood="Angry"
+              aria-label="Angry mood"
+              title="Angry"
+            >
+              😠
+            </button>
+            <button
+              type="button"
+              class="mood-btn text-4xl"
+              data-mood="Anxious"
+              aria-label="Anxious mood"
+              title="Anxious"
+            >
+              😰
+            </button>
+          </form>
+          <p
+            id="message"
+            class="mt-4 text-center text-green-600 font-semibold"
+          ></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const MOOD_STORAGE_KEY = "moodTrackerData";
+      const moods = ["Happy", "Sad", "Neutral", "Angry", "Anxious"];
+      const moodColors = {
+        Happy: "#3B82F6", // blue-500
+        Sad: "#6366F1", // indigo-500
+        Neutral: "#6B7280", // gray-500
+        Angry: "#EF4444", // red-500
+        Anxious: "#F59E0B", // amber-500
+      };
+      const moodScores = {
+        Happy: 5,
+        Neutral: 3,
+        Sad: 1,
+        Angry: 0,
+        Anxious: 2,
+      };
+      const moodEmojis = {
+        Happy: "😊",
+        Sad: "😢",
+        Neutral: "😐",
+        Angry: "😠",
+        Anxious: "😰",
+      };
+
+      const ctx = document.getElementById("moodChart").getContext("2d");
+      let moodChart;
+
+      function getStoredMoodData() {
+        const data = localStorage.getItem(MOOD_STORAGE_KEY);
+        return data ? JSON.parse(data) : {};
+      }
+
+      function saveMoodData(data) {
+        localStorage.setItem(MOOD_STORAGE_KEY, JSON.stringify(data));
+      }
+
+      function getPast7Days() {
+        const days = [];
+        const today = new Date();
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(today);
+          d.setDate(today.getDate() - i);
+          days.push(d.toISOString().split("T")[0]);
+        }
+        return days;
+      }
+
+      function getPast3Days() {
+        const days = [];
+        const today = new Date();
+        for (let i = 2; i >= 0; i--) {
+          const d = new Date(today);
+          d.setDate(today.getDate() - i);
+          days.push(d.toISOString().split("T")[0]);
+        }
+        return days;
+      }
+
+      function countMoodFrequency(data) {
+        const past7Days = getPast7Days();
+        const freq = {};
+        moods.forEach((m) => (freq[m] = 0));
+        past7Days.forEach((day) => {
+          // count all entries for this day
+          Object.keys(data).forEach((key) => {
+            if (key.startsWith(day + "_")) {
+              const mood = data[key];
+              if (moods.includes(mood)) {
+                freq[mood]++;
+              }
+            }
+          });
+        });
+        return freq;
+      }
+
+      function createChart() {
+        const storedData = getStoredMoodData();
+        const freq = countMoodFrequency(storedData);
+
+        const chartData = {
+          labels: moods,
+          datasets: [
+            {
+              data: moods.map((m) => freq[m]),
+              backgroundColor: moods.map((m) => moodColors[m]),
+              hoverOffset: 30,
+            },
+          ],
+        };
+
+        const config = {
+          type: "doughnut",
+          data: chartData,
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: "bottom",
+                labels: {
+                  color: "#374151", // Tailwind gray-700
+                  font: { weight: "600" },
+                },
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    const label = context.label || "";
+                    const value = context.parsed || 0;
+                    return `${label}: ${value}`;
+                  },
+                },
+              },
+            },
+            cutout: "70%",
+          },
+        };
+
+        if (moodChart) {
+          moodChart.destroy();
+        }
+        moodChart = new Chart(ctx, config);
+      }
+
+      function updateMood(mood) {
+        const storedData = getStoredMoodData();
+        const now = new Date();
+        const yyyyMMdd = now.toISOString().split("T")[0];
+        const hour = now.getHours();
+        const slot = Math.floor(hour / 4);
+        const key = `${yyyyMMdd}_${slot}`;
+        const messageEl = document.getElementById("message");
+        if (storedData[key]) {
+          // Prompt the user for confirmation to replace the existing mood
+          const existingMood = storedData[key];
+          const confirmReplace = confirm(
+            `A mood (${existingMood}) is already logged for this 4-hour slot. Do you want to replace it with ${mood}?`
+          );
+          if (!confirmReplace) {
+            messageEl.textContent = `Mood update cancelled. Existing mood (${existingMood}) kept.`;
+            setTimeout(() => {
+              messageEl.textContent = "";
+            }, 3000);
+            return;
+          }
+        }
+        storedData[key] = mood;
+        saveMoodData(storedData);
+        createChart();
+        calculateAverageMood();
+        messageEl.textContent = `Mood (${mood}) logged for this 4-hour slot.`;
+        setTimeout(() => {
+          messageEl.textContent = "";
+        }, 3000);
+      }
+
+      function calculateAverageMood() {
+        const storedData = getStoredMoodData();
+        const past3Days = getPast3Days();
+        let totalScore = 0;
+        let count = 0;
+
+        past3Days.forEach((day) => {
+          // collect all moods for this day
+          const moodsForDay = [];
+          Object.keys(storedData).forEach((key) => {
+            if (key.startsWith(day + "_")) {
+              const mood = storedData[key];
+              if (moods.includes(mood)) {
+                moodsForDay.push(mood);
+              }
+            }
+          });
+          if (moodsForDay.length > 0) {
+            const dayScore =
+              moodsForDay.reduce((sum, m) => sum + moodScores[m], 0) /
+              moodsForDay.length;
+            totalScore += dayScore;
+            count++;
+          }
+        });
+
+        const avgMoodEl = document.getElementById("avgMood");
+        const moodLogDetailsEl = document.getElementById("moodLogDetails");
+        if (count === 0) {
+          avgMoodEl.textContent = "No mood data logged in the last 3 days.";
+          moodLogDetailsEl.innerHTML = "";
+          return;
+        }
+        const avgScore = totalScore / count;
+        // Find closest mood by score
+        let closestMood = moods[0];
+        let minDiff = Math.abs(avgScore - moodScores[closestMood]);
+        for (let m of moods) {
+          const diff = Math.abs(avgScore - moodScores[m]);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestMood = m;
+          }
+        }
+        avgMoodEl.textContent = `Average mood (last 3 days): ${moodEmojis[closestMood]} ${closestMood}`;
+
+        // New: Show moods logged in 4-hour intervals for each day
+        const timeLabels = [
+          "00–04",
+          "04–08",
+          "08–12",
+          "12–16",
+          "16–20",
+          "20–24",
+        ];
+        let html = "";
+        past3Days.forEach((day) => {
+          html += `<div class="mb-3"><strong>${day}</strong><ul class="list-disc list-inside">`;
+          for (let slot = 0; slot < 6; slot++) {
+            const key = `${day}_${slot}`;
+            const mood = storedData[key];
+            if (mood && moods.includes(mood)) {
+              html += `<li><span class="font-semibold">${timeLabels[slot]}:</span> ${moodEmojis[mood]} ${mood}</li>`;
+            } else {
+              html += `<li><span class="font-semibold">${timeLabels[slot]}:</span> -</li>`;
+            }
+          }
+          html += "</ul></div>";
+        });
+        moodLogDetailsEl.innerHTML = html;
+      }
+
+      document.querySelectorAll(".mood-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const mood = btn.getAttribute("data-mood");
+          updateMood(mood);
+        });
+      });
+
+      // Initial chart render and average mood calculation
+      createChart();
+      calculateAverageMood();
+    </script>
+  </body>
+</html>

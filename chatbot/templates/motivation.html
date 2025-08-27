@@ -1,0 +1,274 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Motivation</title>
+
+    <!-- Bootstrap CSS for carousel and UI components -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom CSS for carousel image sizing -->
+    <style>
+      body {
+        position: relative;
+        min-height: 100vh;
+      }
+      .carousel-img {
+        height: 350px;
+        object-fit: cover; /* Ensures image fills container without distortion */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans relative">
+      <!-- Left Hover Sidebar Wrapper -->
+<div class="fixed top-4 bottom-4 left-0 flex z-50 group">
+  <!-- Hover Edge -->
+  <div class="w-2 bg-transparent group-hover:w-64 transition-all duration-300 overflow-hidden">
+    <!-- Sidebar Content -->
+    <div class="h-full w-64 bg-blue-800/30 backdrop-blur-md text-white p-4 shadow-2xl rounded-r-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white">Navigation</h2>
+      <nav class="flex flex-col space-y-4">
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'homepage' %}" class="text-white text-xl hover:underline">Home</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'chatbot_ui' %}" class="text-white text-xl hover:underline">Chatbot</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'moodtracker' %}" class="text-white text-xl hover:underline">Mood Tracker</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'motivation' %}" class="text-white text-xl hover:underline">Motivation</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Checklist' %}" class="text-white text-xl hover:underline">Checklist</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Journal' %}" class="text-white text-xl hover:underline">Journal</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Resources' %}" class="text-white text-xl hover:underline">Resources</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow mb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 text-xl font-bold text-blue-600">
+        Mental Wellness
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <a href="{% url 'homepage' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="{% url 'chatbot_ui' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Chatbot</a>
+        <a href="{% url 'moodtracker' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mood Tracker</a>
+        <a href="{% url 'Journal' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Journal</a>
+        <a href="{% url 'motivation' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Motivation</a>
+        <a href="{% url 'Checklist' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Checklist</a>
+        <a href="{% url 'Resources' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <!-- Floating centered carousel block -->
+    <div
+      class="mx-auto my-12 bg-white/90 backdrop-blur-sm shadow-xl rounded-lg p-6 max-w-4xl"
+    >
+      <!-- MOTIVATIONAL IMAGE CAROUSEL -->
+      <div
+        id="motivationCarousel"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-inner">
+          <!-- Each carousel-item holds one motivational image -->
+          <div class="carousel-item active">
+            <img
+              src="{% static 'picture/image1.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 1"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image2.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 2"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image3.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 3"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image4.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 4"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image5.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 5"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image6.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 6"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image7.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 7"
+            />
+          </div>
+          <div class="carousel-item">
+            <img
+              src="{% static 'picture/image8.png' %}"
+              class="d-block w-100 carousel-img"
+              alt="Motivation 8"
+            />
+          </div>
+        </div>
+
+        <!-- Carousel navigation buttons -->
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#motivationCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#motivationCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOTIVATIONAL QUOTES SECTION -->
+    <section class="mt-12 max-w-4xl mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center text-blue-700 mb-6">
+        Motivational Quotes
+      </h2>
+
+      <!-- Predefined list of quotes -->
+      <div class="space-y-4 text-center text-lg text-gray-700" id="quote-list">
+        <p class="italic">
+          "Believe you can and you're halfway there." – Theodore Roosevelt
+        </p>
+        <p class="italic">
+          "Push yourself, because no one else is going to do it for you."
+        </p>
+        <p class="italic">
+          "Success doesn’t just find you. You have to go out and get it."
+        </p>
+        <p class="italic">
+          "The harder you work for something, the greater you’ll feel when you
+          achieve it."
+        </p>
+        <p class="italic">"Your limitation—it's only your imagination."</p>
+        <p class="italic">"Great things never come from comfort zones."</p>
+      </div>
+
+      <!-- FORM TO ADD USER QUOTES -->
+      <div class="mt-8">
+        <h3 class="text-2xl font-semibold mb-2 text-center text-blue-600">
+          Add Your Own Quote
+        </h3>
+        <form id="quote-form" class="flex flex-col items-center gap-4">
+          <!-- User input field -->
+          <textarea
+            id="quote-input"
+            rows="3"
+            placeholder="Your motivational quote..."
+            class="w-full max-w-xl p-3 border rounded shadow focus:outline-none focus:ring focus:border-blue-300"
+          ></textarea>
+          <!-- Submit button -->
+          <button
+            type="submit"
+            class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Add Quote
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS Bundle (includes Popper.js for dropdowns, tooltips, etc.) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- SCRIPT: Handle quote input and save to localStorage -->
+    <script>
+      const form = document.getElementById("quote-form");
+      const input = document.getElementById("quote-input");
+      const quoteList = document.getElementById("quote-list");
+
+      // Load user quotes from localStorage when the page loads
+      function loadQuotes() {
+        const stored = JSON.parse(localStorage.getItem("userQuotes") || "[]");
+        stored.forEach((quote) => {
+          const p = document.createElement("p");
+          p.className = "italic";
+          p.textContent = quote;
+          quoteList.appendChild(p);
+        });
+      }
+
+      // Handle new quote submissions
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const quote = input.value.trim();
+        if (quote) {
+          // Add new quote to the page
+          const p = document.createElement("p");
+          p.className = "italic";
+          p.textContent = quote;
+          quoteList.appendChild(p);
+
+          // Save the new quote to localStorage
+          let stored = JSON.parse(localStorage.getItem("userQuotes") || "[]");
+          stored.push(quote);
+          localStorage.setItem("userQuotes", JSON.stringify(stored));
+
+          // Clear input field
+          input.value = "";
+        }
+      });
+
+      // Initial load
+      loadQuotes();
+
+      // Update background image on carousel slide
+      const carouselElement = document.getElementById("motivationCarousel");
+    </script>
+  </body>
+</html>

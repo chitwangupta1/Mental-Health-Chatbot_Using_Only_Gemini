@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+      <!-- Left Hover Sidebar Wrapper -->
+<div class="fixed top-4 bottom-4 left-0 flex z-50 group">
+  <!-- Hover Edge -->
+  <div class="w-2 bg-transparent group-hover:w-64 transition-all duration-300 overflow-hidden">
+    <!-- Sidebar Content -->
+    <div class="h-full w-64 bg-blue-800/30 backdrop-blur-md text-white p-4 shadow-2xl rounded-r-lg">
+      <h2 class="text-2xl font-bold mb-4 text-white">Navigation</h2>
+      <nav class="flex flex-col space-y-4">
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'homepage' %}" class="text-white text-xl hover:underline">Home</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'chatbot_ui' %}" class="text-white text-xl hover:underline">Chatbot</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'moodtracker' %}" class="text-white text-xl hover:underline">Mood Tracker</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'motivation' %}" class="text-white text-xl hover:underline">Motivation</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Checklist' %}" class="text-white text-xl hover:underline">Checklist</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Journal' %}" class="text-white text-xl hover:underline">Journal</a>
+        </div>
+        <div class="p-2 bg-blue-500/30 rounded hover:bg-blue-500/50 transform hover:-translate-y-1 transition duration-300">
+          <a href="{% url 'Resources' %}" class="text-white text-xl hover:underline">Resources</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation Bar -->
+<nav class="bg-white shadow mb-6">
+  <div class="container mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+      <div class="flex-shrink-0 text-xl font-bold text-blue-600">
+        Mental Wellness
+      </div>
+      <div class="hidden md:flex space-x-4">
+        <a href="{% url 'homepage' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="{% url 'chatbot_ui' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Chatbot</a>
+        <a href="{% url 'moodtracker' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Mood Tracker</a>
+        <a href="{% url 'Journal' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Journal</a>
+        <a href="{% url 'motivation' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Motivation</a>
+        <a href="{% url 'Checklist' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Checklist</a>
+        <a href="{% url 'Resources' %}" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Resources</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <div class="flex w-full max-w-6xl h-screen flex justify-center items-center">
+      <main class="flex-grow flex flex-col items-center justify-center p-8">
+        <textarea
+          id="thoughtInput"
+          rows="15"
+          placeholder="Write your thoughts here..."
+          class="w-full max-w-3xl p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none text-lg"
+        ></textarea>
+        <button
+          id="saveBtn"
+          class="mt-4 px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          Save
+        </button>
+      </main>
+      <aside class="w-96 bg-white shadow-lg p-6 right-0 overflow-y-auto top-0>
+      {% comment %} fixed   h-full ">  {% endcomment %}
+        <h2 class="text-xl font-semibold mb-4 border-b pb-2">
+          My Thoughts (Last 3 Months)
+        </h2>
+        <div id="thoughtList" class="space-y-4"></div>
+      </aside>
+    </div>
+
+    <script>
+      const thoughtInput = document.getElementById("thoughtInput");
+      const saveBtn = document.getElementById("saveBtn");
+      const thoughtList = document.getElementById("thoughtList");
+
+      // Load thoughts from localStorage and display
+      function loadThoughts() {
+        const stored = localStorage.getItem("thoughts");
+        let thoughts = stored ? JSON.parse(stored) : [];
+        const now = new Date();
+        const cutoff = new Date(now.getTime() - 90 * 24 * 60 * 60 * 1000);
+        // Filter to last 90 days
+        thoughts = thoughts.filter((t) => new Date(t.timestamp) >= cutoff);
+        // Save filtered thoughts back (clean old)
+        localStorage.setItem("thoughts", JSON.stringify(thoughts));
+        displayThoughts(thoughts);
+      }
+
+      // Display thoughts in sidebar
+      function displayThoughts(thoughts) {
+        thoughtList.innerHTML = "";
+        if (thoughts.length === 0) {
+          thoughtList.innerHTML =
+            '<p class="text-gray-500">No thoughts to display.</p>';
+          return;
+        }
+        thoughts.forEach((t, i) => {
+          const container = document.createElement("div");
+          container.className =
+            "border rounded p-3 bg-gray-50 flex flex-col space-y-2";
+
+          const time = document.createElement("time");
+          const dateObj = new Date(t.timestamp);
+          time.textContent = dateObj.toLocaleString();
+          time.className = "text-xs text-gray-500";
+
+          const text = document.createElement("p");
+          text.textContent = t.text;
+          text.className = "whitespace-pre-wrap text-gray-800";
+
+          const delBtn = document.createElement("button");
+          delBtn.textContent = "Delete";
+          delBtn.className = "self-start text-red-600 hover:underline text-sm";
+          delBtn.addEventListener("click", () => deleteThought(t.timestamp));
+
+          container.appendChild(time);
+          container.appendChild(text);
+          container.appendChild(delBtn);
+
+          thoughtList.appendChild(container);
+        });
+      }
+
+      // Save new thought
+      function saveThought() {
+        const text = thoughtInput.value.trim();
+        if (!text) return;
+        const timestamp = new Date().toISOString();
+        const stored = localStorage.getItem("thoughts");
+        const thoughts = stored ? JSON.parse(stored) : [];
+        thoughts.push({ text, timestamp });
+        localStorage.setItem("thoughts", JSON.stringify(thoughts));
+        thoughtInput.value = "";
+        loadThoughts();
+      }
+
+      // Delete thought by timestamp
+      function deleteThought(timestamp) {
+        const stored = localStorage.getItem("thoughts");
+        let thoughts = stored ? JSON.parse(stored) : [];
+        thoughts = thoughts.filter((t) => t.timestamp !== timestamp);
+        localStorage.setItem("thoughts", JSON.stringify(thoughts));
+        loadThoughts();
+      }
+
+      saveBtn.addEventListener("click", saveThought);
+      window.addEventListener("load", loadThoughts);
+    </script>
+  </body>
+</html>
