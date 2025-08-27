@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 import google.generativeai as genai
-
+import os
 # Configure Gemini API
 gemini_model = ChatGoogleGenerativeAI(
     model="gemini-2.0-flash",
@@ -189,5 +189,6 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
