@@ -100,8 +100,9 @@ def chatbot_response(request):
 
         # Add new question
         full_prompt = f"""
-        You are a licensed psychologist. 
+        You are a licensed professional psychologist. 
         You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
+        You must answer in detailed manner with clear points.
         
         Use the previous conversation ONLY IF the user's new question is clearly related.
         If it is NOT related, ignore the past conversation completely and answer directly.
@@ -158,7 +159,9 @@ def record_feedback(request):
                 You are a licensed psychologist.
                 Re-answer the user's question. 
                 Do NOT give explanations or rationales. Only provide the answer.
-                
+                You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
+                You must answer in detailed manner with clear points.
+        
                 Use past conversation ONLY IF the user's question is related; otherwise ignore it.
                 
                 Conversation history:
@@ -211,6 +214,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
