@@ -157,7 +157,7 @@ def record_feedback(request):
 
                 full_prompt = f"""
                 You are a licensed psychologist.
-                Re-answer the user's question. 
+                Re-answer the user's question witha better answer with more remedies or details whatever is asked in a well defined manner. 
                 Do NOT give explanations or rationales. Only provide the answer.
                 You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
                 You must answer in detailed manner with clear points.
@@ -169,7 +169,7 @@ def record_feedback(request):
                 
                 User question: {original_question}
                 
-                Your previous answer (for reference only, do NOT repeat reasoning): {response_text}
+                Your previous answer (for reference only, do NOT repeat reasoning, do Not repeat the same answer as previous): {response_text}
                 
                 Provide the corrected answer (no rationale):
                 """
@@ -214,6 +214,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
