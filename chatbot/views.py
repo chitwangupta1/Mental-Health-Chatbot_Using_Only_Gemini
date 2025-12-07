@@ -99,11 +99,21 @@ def chatbot_response(request):
             context += f"User: {turn['user']}\nBot: {turn['bot']}\n"
 
         # Add new question
-        full_prompt = (
-            f"You are a licensed psychologist. "
-            f"Consider the past conversation when answering.\n\n"
-            f"{context}User: {user_input}\nBot:"
-        )
+        full_prompt = f"""
+        You are a licensed psychologist. 
+        You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
+        
+        Use the previous conversation ONLY IF the user's new question is clearly related.
+        If it is NOT related, ignore the past conversation completely and answer directly.
+        
+        Conversation history:
+        {context}
+        
+        New question: {user_input}
+        
+        Answer (no rationale): 
+        """
+
 
         try:
             gemini_response = gemini_model.invoke(full_prompt)
@@ -144,11 +154,23 @@ def record_feedback(request):
                 for turn in history:
                     context += f"User: {turn['user']}\nBot: {turn['bot']}\n"
 
-                full_prompt = (
-                    f"You are a licensed psychologist. "
-                    f"Re-answer the question considering past conversation.\n\n"
-                    f"{context}User: {original_question}\n Previous Response:{response_text}\nBot:"
-                )
+                full_prompt = f"""
+                You are a licensed psychologist.
+                Re-answer the user's question. 
+                Do NOT give explanations or rationales. Only provide the answer.
+                
+                Use past conversation ONLY IF the user's question is related; otherwise ignore it.
+                
+                Conversation history:
+                {context}
+                
+                User question: {original_question}
+                
+                Your previous answer (for reference only, do NOT repeat reasoning): {response_text}
+                
+                Provide the corrected answer (no rationale):
+                """
+
 
                 gemini_response = gemini_model.invoke(full_prompt)
                 formatted_gemini_response = format_gemini_response(str(gemini_response.content))
@@ -189,6 +211,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
