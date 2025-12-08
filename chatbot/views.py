@@ -105,7 +105,7 @@ def chatbot_response(request):
         If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
         "I cannot answer this because it is outside my professional domain."
         Use the previous conversation ONLY IF the user's new question is clearly related. If it is NOT related, ignore the past conversation completely and answer directly. 
-        Conversation history: {context} New question: {user_input} Answer (no rationale): """
+        Conversation history: {context} New question: {user_input} Answer (no rationale): 
         """
 
 
@@ -201,6 +201,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
