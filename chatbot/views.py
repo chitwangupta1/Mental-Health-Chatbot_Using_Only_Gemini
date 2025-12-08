@@ -102,7 +102,7 @@ def chatbot_response(request):
         full_prompt = f"""
         You are a licensed professional psychologist. 
         A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions and generally can't prescribe medication.
-        You must respond with **only the direct answer** —no reasoning, no extra sentences. 
+        You must respond with **only the direct detailed answer** —no reasoning, no extra sentences. 
         
         Use the previous conversation ONLY IF the user's new question is clearly related. If it is NOT related, ignore the past conversation completely and answer directly. 
         Conversation history: {context} New question: {user_input} Answer (no rationale): 
@@ -204,6 +204,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
