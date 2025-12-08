@@ -101,14 +101,16 @@ def chatbot_response(request):
         # Add new question
         full_prompt = f"""
         You are a licensed professional psychologist. 
+        A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions and generally can't prescribe medication.
         You must respond with **only the direct answer** —no reasoning, no extra sentences. 
-        If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
-        "I cannot answer this because it is outside my professional domain."
+        
         Use the previous conversation ONLY IF the user's new question is clearly related. If it is NOT related, ignore the past conversation completely and answer directly. 
         Conversation history: {context} New question: {user_input} Answer (no rationale): 
         """
 
-
+# If the user’s query is related to mental health or user life trauma or intoduction (for example: hospital recommendations, mental health care remedies, mini intoduction, life trauma discussion) you must respond accordinly providing best consultation.
+# If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
+# "I cannot answer this because it is outside my professional domain."
         try:
             gemini_response = gemini_model.invoke(full_prompt)
             gemini_text = str(gemini_response.content)
@@ -150,9 +152,9 @@ def record_feedback(request):
 
                 full_prompt = f"""
                 You are a licensed psychologist. 
+                A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions and generally can't prescribe medication.
+                Anything esle is out of their domain and they hence couldn't answer that.
                 Re-answer the user's question with a better answer than previos one with better consultant in aligned to user question in a well defined manner. 
-                If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
-                "I cannot answer this because it is outside my professional domain."
                 Do NOT give explanations or rationales. Only provide the answer. You must respond with **only the direct answer** —no reasoning, no extra sentences. 
                 You must answer in detailed manner with clear points. Use past conversation ONLY IF the user's question is related; otherwise ignore it. 
                 Conversation history: {context} User question: {original_question} 
@@ -160,7 +162,8 @@ def record_feedback(request):
                 Provide the corrected answer (no rationale)
 
                 """
-
+# If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
+# "I cannot answer this because it is outside my professional domain."
 
                 gemini_response = gemini_model.invoke(full_prompt)
                 formatted_gemini_response = format_gemini_response(str(gemini_response.content))
@@ -201,6 +204,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
