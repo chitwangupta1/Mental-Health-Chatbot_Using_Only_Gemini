@@ -102,8 +102,9 @@ def chatbot_response(request):
         full_prompt = f"""
         You are a licensed professional psychologist. 
         A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions and generally can't prescribe medication.
+        Anything esle is out of their domain and they hence couldn't answer that.
         You must respond with **only the direct detailed answer** —no reasoning, no extra sentences. 
-        
+        You must answer in detailed manner with clear points. 
         Use the previous conversation ONLY IF the user's new question is clearly related. If it is NOT related, ignore the past conversation completely and answer directly. 
         Conversation history: {context} New question: {user_input} Answer (no rationale): 
         """
@@ -156,7 +157,8 @@ def record_feedback(request):
                 Anything esle is out of their domain and they hence couldn't answer that.
                 Re-answer the user's question with a better answer than previos one with better consultant in aligned to user question in a well defined manner. 
                 Do NOT give explanations or rationales. Only provide the answer. You must respond with **only the direct answer** —no reasoning, no extra sentences. 
-                You must answer in detailed manner with clear points. Use past conversation ONLY IF the user's question is related; otherwise ignore it. 
+                You must answer in detailed manner with clear points. 
+                Use past conversation ONLY IF the user's question is related; otherwise ignore it. If it is NOT related, ignore the past conversation completely and answer directly. 
                 Conversation history: {context} User question: {original_question} 
                 Your previous answer (for reference only, do NOT repeat reasoning, do Not repeat the same answer as previous): {response_text} 
                 Provide the corrected answer (no rationale)
@@ -204,6 +206,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
