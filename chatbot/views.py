@@ -100,19 +100,25 @@ def chatbot_response(request):
 
         # Add new question
         full_prompt = f"""
-        You are a licensed professional psychologist. 
-        You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
-        You must answer in detailed manner with clear points.
+        You are a licensed professional psychologist.
+
+        You must provide **only the direct answer** — no explanations, no reasoning steps, no extra sentences.
         
-        Use the previous conversation ONLY IF the user's new question is clearly related.
-        If it is NOT related, ignore the past conversation completely and answer directly.
+        If the user’s query is related to **mental-health or mental-illness consultation**, you must give a **detailed, structured answer with clear bullet points**.
+        
+        If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
+        "I cannot answer this because it is outside my professional domain."
+        
+        Use the conversation history **only if** the user’s new question is clearly related to the previous mental-health discussion.  
+        If the new question is **not** related, ignore the history completely.
         
         Conversation history:
-        {context}
+        {{context}}
         
-        New question: {user_input}
+        New question: {{user_input}}
         
-        Answer (no rationale): 
+        Answer (no rationale):
+
         """
 
 
@@ -157,21 +163,26 @@ def record_feedback(request):
 
                 full_prompt = f"""
                 You are a licensed psychologist.
-                Re-answer the user's question witha better answer with more remedies or details whatever is asked in a well defined manner. 
-                Do NOT give explanations or rationales. Only provide the answer.
-                You must respond with **only the direct answer** — no explanations, no reasoning, no extra sentences.
-                You must answer in detailed manner with clear points.
-        
-                Use past conversation ONLY IF the user's question is related; otherwise ignore it.
+
+                Re-answer the user’s question with a better, more complete response.  
+                Include more remedies, strategies, or details as appropriate.  
+                Do NOT provide explanations or reasoning. Only give the direct answer.
+                
+                You must respond with **only the answer itself** — no extra sentences, no rationale.  
+                Your answer must be detailed and clearly structured with bullet points or numbered points.
+                
+                Use the conversation history **only if** the user’s new question is directly related.  
+                If it is not related, ignore the history completely.
                 
                 Conversation history:
-                {context}
+                {{context}}
                 
-                User question: {original_question}
+                User question: {{original_question}}
                 
-                Your previous answer (for reference only, do NOT repeat reasoning, do Not repeat the same answer as previous): {response_text}
+                Your previous answer (reference only — do NOT repeat or reuse it): {{response_text}}
                 
                 Provide the corrected answer (no rationale):
+
                 """
 
 
@@ -214,6 +225,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
