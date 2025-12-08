@@ -101,7 +101,7 @@ def chatbot_response(request):
         # Add new question
         full_prompt = f"""
         You are a licensed professional psychologist. 
-        A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions, suggest remedies, nearby help centres or hospital recommendations, etc task-related to treating mental health illness and generally can't prescribe medication.
+        A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions, suggest remedies, recommend nearby help centres or hospitals if asked, etc, task-related to treating mental health illness and generally can't prescribe medication.
         Anything else is out of their domain, and they hence couldn't answer that.
         You must respond with **only the direct detailed answer** —no reasoning, no extra sentences. 
         You must answer in a detailed manner with clear points. 
@@ -150,7 +150,7 @@ def record_feedback(request):
 
                 full_prompt = f"""
                 You are a licensed psychologist. 
-                A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions, suggest remedies, nearby help centres or hospital recommendations, etc task-related to treating mental health illness and generally can't prescribe medication.
+                A psychologist is a mental health professional who studies human behavior, emotions, and thought processes to help individuals understand and manage life challenges, mental health conditions, suggest remedies, recommend nearby help centres or hospitals if asked, etc, task-related to treating mental health illness and generally can't prescribe medication.
                 Anything else is out of their domain, and they hence couldn't answer that.
                 Re-answer the user's question with a better answer than the previous one, with a better consultant aligned to the user's question in a well-defined manner. 
                 Do NOT give explanations or rationales. Only provide the answer. You must respond with **only the direct answer** —no reasoning, no extra sentences. 
@@ -203,6 +203,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
