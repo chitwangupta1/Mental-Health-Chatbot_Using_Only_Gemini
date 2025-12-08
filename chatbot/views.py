@@ -100,32 +100,12 @@ def chatbot_response(request):
 
         # Add new question
         full_prompt = f"""
-        You are a licensed professional psychologist.
-
-        Your rules:
-        1. If the user's question is about mental health or mental illness or a introduction or a issue which can lead to mental illness:
-           - Provide a detailed, structured answer using clear bullet points.
-           - Do NOT show reasoning steps.
-        
-        2. If the user's question is NOT about mental health:
-           - You must reply with exactly:
-             "I cannot answer this because it is outside my professional domain."
-        
-        3. Do NOT give mental-health advice for non-mental-health queries.
-        
-        4. Use conversation history ONLY if the new question is clearly about mental health.
-           Ignore it otherwise.
-        
-        Your output must contain ONLY the final answer — no explanations of the rules.
-        
-        Conversation history:
-        {{context}}
-        
-        User question: {{user_input}}
-        
-        Final answer:
-
-
+        You are a licensed professional psychologist. 
+        You must respond with **only the direct answer** —no reasoning, no extra sentences. 
+        If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
+        "I cannot answer this because it is outside my professional domain."
+        Use the previous conversation ONLY IF the user's new question is clearly related. If it is NOT related, ignore the past conversation completely and answer directly. 
+        Conversation history: {context} New question: {user_input} Answer (no rationale): """
         """
 
 
@@ -169,26 +149,15 @@ def record_feedback(request):
                     context += f"User: {turn['user']}\nBot: {turn['bot']}\n"
 
                 full_prompt = f"""
-                You are a licensed psychologist.
-
-                Re-answer the user’s question with a better, more complete response.  
-                Include more remedies, strategies, or details as appropriate.  
-                Do NOT provide explanations or reasoning. Only give the direct answer.
-                
-                You must respond with **only the answer itself** — no extra sentences, no rationale.  
-                Your answer must be detailed and clearly structured with bullet points or numbered points.
-                
-                Use the conversation history **only if** the user’s new question is directly related.  
-                If it is not related, ignore the history completely.
-                
-                Conversation history:
-                {{context}}
-                
-                User question: {{original_question}}
-                
-                Your previous answer (reference only — do NOT repeat or reuse it): {{response_text}}
-                
-                Provide the corrected answer (no rationale):
+                You are a licensed psychologist. 
+                Re-answer the user's question with a better answer than previos one with better consultant in aligned to user question in a well defined manner. 
+                If the user’s query is **not** related to mental health (for example: skincare tips, restaurant recommendations, travel advice, gym routines, coding help, business ideas, etc.), you must respond with:
+                "I cannot answer this because it is outside my professional domain."
+                Do NOT give explanations or rationales. Only provide the answer. You must respond with **only the direct answer** —no reasoning, no extra sentences. 
+                You must answer in detailed manner with clear points. Use past conversation ONLY IF the user's question is related; otherwise ignore it. 
+                Conversation history: {context} User question: {original_question} 
+                Your previous answer (for reference only, do NOT repeat reasoning, do Not repeat the same answer as previous): {response_text} 
+                Provide the corrected answer (no rationale)
 
                 """
 
@@ -232,6 +201,7 @@ def record_feedback(request):
             return JsonResponse({"status": "feedback recorded"})
 
     return JsonResponse({"error": "Invalid request"}, status=400)
+
 
 
 
